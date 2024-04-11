@@ -41,23 +41,14 @@ const codecs = new Codecs(argv);
 const languages = new Languages(argv);
 const server = getServer("ws", argv);
 
-// server.on("connection", (client) => {
-// 	dispatch({
-// 		codecs: codecs,
-// 		languages: languages,
-// 		transport: client,
-// 		provider: getProvider("google", argv),
-// 	});
-// });
-
-
 server.on("connection", (client) => {
-    dispatch({
-        transport: client,
-        provider: getProvider("custom", {}), // Ensure this matches your updated provider
-    });
+	dispatch({
+		codecs: codecs,
+		languages: languages,
+		transport: client,
+		provider: getProvider("google", argv),
+	});
 });
-
 
 process.on("SIGINT", () => {
 	server.close();
@@ -68,5 +59,3 @@ process.on("SIGTERM", () => {
 	server.close();
 	process.exit(0);
 });
-
-
