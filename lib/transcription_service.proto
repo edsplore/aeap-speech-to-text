@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package transcription;
+
+// The transcription service definition.
+service TranscriptionService {
+  // Streams audio content and receives transcription results in real time.
+  rpc TranscribeStream(stream AudioContent) returns (stream TranscriptionResult);
+}
+
+// The request message containing the audio content.
+message AudioContent {
+  bytes audio_data = 1; // Audio data sent from client to server in chunks.
+}
+
+// The response message containing the transcription results.
+message TranscriptionResult {
+  string transcript = 1; // The transcribed text.
+  float confidence = 2; // The confidence score of the transcription.
+}
