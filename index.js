@@ -18,7 +18,7 @@
 
 const { Codecs } = require("./lib/codecs");
 const { Languages } = require("./lib/languages");
-const { CustomProvider } = require("./lib/provider"); // Ensure this is correctly pointing to your updated gRPC provider
+const { getProvider }  = require("./lib/provider"); // Ensure this is correctly pointing to your updated gRPC provider
 const { getServer } = require("./lib/server");
 const { dispatch } = require("./lib/dispatcher");
 
@@ -44,7 +44,7 @@ server.on("connection", (client) => {
         codecs: codecs,
         languages: languages,
         transport: client,
-        provider: new CustomProvider('localhost:8084'), // Instantiate your CustomProvider with the server address
+        provider: getProvider("custom", {serverAddress: 'localhost:8084'}),
     });
 });
 
