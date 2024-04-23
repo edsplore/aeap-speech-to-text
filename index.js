@@ -16,7 +16,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-
+require('dotenv').config();
 const { Codecs } = require("./lib/codecs");
 const { Languages } = require("./lib/languages");
 
